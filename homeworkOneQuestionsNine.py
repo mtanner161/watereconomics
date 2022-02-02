@@ -12,11 +12,15 @@ data = pd.read_excel(
     r"C:\Users\MichaelTanner\OneDrive - Sandstone Group\Colorado School of Mines\Semester 3\Economics of Water\demandDataHwOne.xlsx"
 )
 
-xvar = data[["MP", "INC", "C25"]]
+xvarMp = data[["MP", "INC", "C25"]]
+xvarAp = data[["AP", "INC", "C25"]]
+
 
 yvar = data["Q"]
-xvar = sm.add_constant(xvar)
-model = sm.OLS(yvar, xvar.astype(float), missing="drop").fit()
-print(model.summary())
+xvarMp = sm.add_constant(xvarMp)
+xvarAp = sm.add_constant(xvarMp)
+modelMp = sm.OLS(yvar, xvarMp.astype(float), missing="drop").fit()
+modelAp = sm.OLS(yvar, xvarAp.astype(float), missing="drop").fit()
 
-print("yay")
+print(modelMp.summary())
+print(modelAp.summary())
